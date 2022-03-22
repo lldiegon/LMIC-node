@@ -727,7 +727,7 @@ void processWork(ostime_t doWorkJobTimeStamp)
         // and can be reset with a 'reset counter' command downlink message.
 
         uint16_t counterValue = getCounterValue();
-        ostime_t timestamp = os_getTime();
+        ostime_t timestamp = os_getTime() / 240000000;
 
         #ifdef USE_DISPLAY
             // Interval and Counter values are combined on a single row.
@@ -846,8 +846,11 @@ void setup()
 //  ▀▀▀ ▀▀▀ ▀▀▀ ▀ ▀   ▀▀▀ ▀▀▀ ▀▀  ▀▀▀   ▀▀  ▀▀▀ ▀▀▀ ▀▀▀ ▀ ▀
 
     // Place code for initializing sensors etc. here.
+    LMIC_setDrTxpow(EU868_DR_SF9, 14);
+    // LMIC_setClockError(MAX_CLOCK_ERROR * 10 / 100);
 
     resetCounter();
+
 
 //  █ █ █▀▀ █▀▀ █▀▄   █▀▀ █▀█ █▀▄ █▀▀   █▀▀ █▀█ █▀▄
 //  █ █ ▀▀█ █▀▀ █▀▄   █   █ █ █ █ █▀▀   █▀▀ █ █ █ █
